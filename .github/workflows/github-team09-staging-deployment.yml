@@ -17,9 +17,10 @@ on:
     branches-ignore: master
   
 env:
-  AZURE_WEBAPP_NAME: github-team-9-demo-github-team-9-demo-staging # set this to your application's name
+  AZURE_WEBAPP_NAME: github-team-9 # set this to your application's name
   AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
   NODE_VERSION: '12.x'                # set this to the node version to use
+  AZURE_SLOT_NAME: github-team-9-demo-staging 
 
 jobs:
   build-and-deploy:
@@ -42,5 +43,6 @@ jobs:
       uses: azure/webapps-deploy@v2
       with:
         app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        slot-name: ${{env.AZURE_SLOT_NAME }}
         publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_STAGING }}
         package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
